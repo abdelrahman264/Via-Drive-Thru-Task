@@ -42,7 +42,8 @@ const HomeScreen = ({ navigation }) => {
     return await axios.get(
       `https://newsapi.org/v2/everything?q=${
         !q ? "tesla" : q
-      }&from=2022-04-21&sortBy=publishedAt&apiKey=e22b4d67fab046afabb8c58bb04344a6`
+      }&from=2022-04-22&sortBy=publishedAt&apiKey=e22b4d67fab046afabb8c58bb04344a6
+      `
     );
   };
 
@@ -124,7 +125,7 @@ const HomeScreen = ({ navigation }) => {
                   language === "english" ? lang.search : lang.fr_search
                 }
                 theme={colorScheme === "dark" ? "dark" : "light"}
-                platform={Platform.ios === "ios" ? "ios" : "android"}
+                platform={Platform.OS === "ios" ? "ios" : "android"}
                 cancelText={"Cancel"}
                 cancelTextStyle={{ paddingRight: 10 }}
               >
