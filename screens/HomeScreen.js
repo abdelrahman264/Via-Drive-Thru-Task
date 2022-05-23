@@ -23,6 +23,7 @@ import {
   LanguageContext,
   LanguageProvider,
 } from "../LanguageContext";
+import moment from "moment";
 import { useFocusEffect } from "@react-navigation/native";
 
 const wait = (timeout) => {
@@ -33,6 +34,7 @@ const HomeScreen = ({ navigation }) => {
   const colorScheme = useColorScheme();
   const [q, setQ] = useState("");
   const [refreshing, setRefreshing] = useState(false);
+  const date = moment(new Date()).format('YYYY-MM-dd')
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     wait(2000).then(() => setRefreshing(false));
@@ -42,7 +44,7 @@ const HomeScreen = ({ navigation }) => {
     return await axios.get(
       `https://newsapi.org/v2/everything?q=${
         !q ? "tesla" : q
-      }&from=2022-04-22&sortBy=publishedAt&apiKey=e22b4d67fab046afabb8c58bb04344a6
+      }&from=${date}&sortBy=publishedAt&apiKey=e22b4d67fab046afabb8c58bb04344a6
       `
     );
   };
@@ -161,7 +163,7 @@ const HomeScreen = ({ navigation }) => {
                           <TouchableOpacity
                             onPress={() =>
                               navigation.navigate("Article", {
-                                // image: article.urlToImage,
+                                image: article.urlToImage,
                                 title: article.title,
                                 author: article.author,
                                 source: article.source.name,
